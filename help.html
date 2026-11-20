@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Beasts Help</title>
+<meta name="description" content="How to play Beasts: controls for keyboard, mouse and touch, how beasts live and evolve, predators, mud islands, the beast editor, favorites, the leaderboard, chat commands and saves.">
+<meta name="theme-color" content="#0b1a5c">
+<link rel="icon" href="img/icon.png">
+<link rel="apple-touch-icon" href="img/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Beasts Help">
+<meta property="og:description" content="How to play Beasts, the pond that evolves without you.">
+<meta property="og:image" content="https://beasts.marmonte.ai/img/share.png">
+<meta property="og:url" content="https://beasts.marmonte.ai/help.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep: #070f45; --pond: #0f1d78; --pond-2: #18299a; --card: rgba(255,255,255,0.06); --line: rgba(255,255,255,0.12);
+    --text: #f3f5ff; --muted: #a8b3ea; --algae: #3c9646; --algae-hi: #56b862; --coral: #ec5a4c; --orange: #f2894a;
+    --purple: #9b6ee0; --teal: #3fbcaa; --live: #ff3b3b; --sand: #d8b878;
+    --r: 18px; --max: 1120px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body { margin: 0; background: var(--deep); color: var(--text); font: 17px/1.65 "Noto Sans", system-ui, sans-serif; overflow-x: hidden; }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+  h1, h2, h3 { line-height: 1.15; margin: 0 0 12px; font-weight: 900; letter-spacing: -0.01em; }
+  h1 { font-size: clamp(38px, 6vw, 60px); }
+  h2 { font-size: clamp(26px, 3.4vw, 34px); }
+  h3 { font-size: 19px; font-weight: 800; margin-top: 26px; }
+  p { margin: 0 0 14px; }
+  ul, ol { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--algae-hi); }
+  .muted { color: var(--muted); }
+  .eyebrow { text-transform: uppercase; letter-spacing: 0.14em; font-size: 13px; font-weight: 800; color: var(--algae-hi); margin-bottom: 8px; }
+  kbd { display: inline-block; min-width: 1.6em; padding: 1px 7px; border-radius: 7px; text-align: center; white-space: nowrap;
+    font: 700 14px/1.5 ui-monospace, Menlo, monospace; color: #fff; background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.22); box-shadow: 0 2px 0 rgba(0,0,0,.35); }
+  code { font: 600 15px ui-monospace, Menlo, monospace; background: rgba(0,0,0,.3); border: 1px solid var(--line); padding: 1px 6px; border-radius: 6px; }
+
+  /* Buttons and nav, as on the home page */
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; font-weight: 800;
+    font-size: 17px; text-decoration: none; border: 0; cursor: pointer; transition: transform .12s, background .12s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-play { background: var(--algae); color: #fff; box-shadow: 0 8px 0 #2a6e33, 0 14px 30px rgba(0,0,0,.35); }
+  .btn-play:hover { background: var(--algae-hi); }
+  .btn-ghost { background: rgba(255,255,255,0.1); color: var(--text); border: 2px solid rgba(255,255,255,0.25); }
+  .end-ctas { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+  nav { position: fixed; inset: 0 0 auto 0; z-index: 20; background: rgba(7,15,69,0.82); backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  nav .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 22px; text-decoration: none; }
+  nav .brand img { width: 32px; height: 32px; border-radius: 8px; }
+  nav .links { display: flex; gap: 22px; align-items: center; font-weight: 600; font-size: 15px; }
+  nav .links a { text-decoration: none; opacity: .85; }
+  nav .links a:hover, nav .links a[aria-current] { opacity: 1; }
+  nav .links a[aria-current] { color: var(--algae-hi); }
+  nav .links .btn { padding: 8px 16px; font-size: 15px; box-shadow: 0 4px 0 #2a6e33; }
+
+  /* Header */
+  .top { padding: 130px 0 50px; background: radial-gradient(900px 420px at 85% 0%, rgba(86,184,98,.18), transparent 60%),
+    radial-gradient(700px 380px at 0% 20%, rgba(155,110,224,.14), transparent 60%), var(--pond); border-bottom: 1px solid var(--line); }
+  .top p { max-width: 640px; color: #dfe4ff; font-size: 18px; }
+  .quick { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .quick a { text-decoration: none; font-size: 15px; font-weight: 700; padding: 8px 14px; border-radius: 999px;
+    background: rgba(255,255,255,.08); border: 1px solid var(--line); transition: background .15s, border-color .15s; }
+  .quick a:hover { background: rgba(86,184,98,.18); border-color: var(--algae-hi); }
+
+  /* Layout: contents on the left, the guide on the right */
+  .layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; padding-top: 50px; padding-bottom: 80px; }
+  .toc { position: sticky; top: 92px; align-self: start; font-size: 15px; }
+  .toc b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin-bottom: 10px; }
+  .toc ol { list-style: none; padding: 0; margin: 0; counter-reset: toc; border-left: 1px solid var(--line); }
+  .toc li { margin: 0; counter-increment: toc; }
+  .toc a { display: block; padding: 5px 0 5px 16px; margin-left: -1px; text-decoration: none; color: var(--muted);
+    border-left: 2px solid transparent; transition: color .15s, border-color .15s; }
+  .toc a::before { content: counter(toc) ". "; opacity: .6; }
+  .toc a:hover { color: var(--text); }
+  .toc a.on { color: var(--text); border-left-color: var(--algae-hi); font-weight: 700; }
+
+  .guide section { padding: 0 0 54px; margin-bottom: 54px; border-bottom: 1px solid var(--line); }
+  .guide section:last-child { border-bottom: 0; margin-bottom: 0; }
+  .num { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; margin-right: 12px; vertical-align: 4px;
+    font-size: 15px; font-weight: 900; color: #071045; background: var(--algae-hi); }
+  .guide h2 { display: flex; align-items: center; }
+
+  /* Tables */
+  .table { overflow-x: auto; margin: 14px 0 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+  table { width: 100%; border-collapse: collapse; font-size: 16px; }
+  th, td { text-align: left; vertical-align: top; padding: 11px 16px; border-bottom: 1px solid var(--line); }
+  tr:last-child td { border-bottom: 0; }
+  th { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); font-weight: 800; background: rgba(0,0,0,.18); }
+  td:first-child { white-space: nowrap; }
+  td.wrap-ok { white-space: normal; }
+
+  /* Cards and notes */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 16px 0 18px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; font-size: 16px; }
+  .card b { display: block; margin-bottom: 4px; }
+  .card span { color: var(--muted); }
+  .note { display: flex; gap: 12px; padding: 14px 18px; margin: 16px 0; border-radius: 14px; font-size: 16px;
+    background: rgba(86,184,98,.1); border: 1px solid rgba(86,184,98,.4); }
+  .note.warm { background: rgba(242,137,74,.1); border-color: rgba(242,137,74,.45); }
+  .note > span:first-child { font-size: 20px; line-height: 1.3; }
+  .note p:last-child { margin: 0; }
+  .shot { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 20px 50px rgba(0,0,0,.4); margin: 20px 0; }
+  .shot figcaption { font-size: 14px; color: var(--muted); padding: 10px 14px; background: rgba(0,0,0,.25); }
+  figure { margin: 0; }
+  .cell { width: 30px; height: 30px; vertical-align: middle; margin-right: 8px; }
+  .steps { counter-reset: s; list-style: none; padding: 0; }
+  .steps li { counter-increment: s; position: relative; padding-left: 44px; margin-bottom: 14px; }
+  .steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%;
+    display: grid; place-items: center; font-weight: 900; font-size: 14px; background: rgba(255,255,255,.1); border: 1px solid var(--line); }
+
+  /* FAQ-style troubleshooting */
+  details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+  details:first-of-type { border-top: 1px solid var(--line); }
+  summary { cursor: pointer; font-weight: 800; font-size: 18px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--algae-hi); font-size: 24px; line-height: 1; }
+  details[open] summary::after { content: "–"; }
+  details p, details ul { margin: 12px 0 0; color: #dbe0ff; }
+
+  .end { text-align: center; padding: 60px 20px 70px; background: linear-gradient(180deg, var(--deep), var(--pond)); border-top: 1px solid var(--line); }
+  .end p { color: var(--muted); }
+  footer { padding: 40px 0 60px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 30px; justify-content: space-between; }
+
+  @media (max-width: 900px) {
+    nav .links a:not(.btn) { display: none; }
+    .layout { grid-template-columns: 1fr; gap: 30px; padding-top: 30px; }
+    .toc { position: static; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+    .toc ol { columns: 2; column-gap: 20px; border: 0; }
+    .toc a { padding-left: 0; border: 0; }
+    .top { padding-top: 110px; }
+  }
+  @media (max-width: 520px) { .toc ol { columns: 1; } td:first-child { white-space: normal; } th, td { padding: 10px 12px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="img/icon.png" alt="">Beasts</a>
+    <div class="links">
+      <a href="index.html#play">Play</a>
+      <a href="index.html#watch">Watch</a>
+      <a href="index.html#download">Download</a>
+      <a href="help.html" aria-current="page">Help</a>
+      <a href="index.html#faq">FAQ</a>
+      <a class="btn btn-play" href="index.html#play">Play free</a>
+    </div>
+  </div>
+</nav>
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">Help</div>
+    <h1>How to play Beasts</h1>
+    <p>Everything the pond can do, and how to do it, with a mouse and keyboard or by touch. In the game, press <kbd>I</kbd> or the side panel's <b>Help</b> button for a quick list of controls.</p>
+    <div class="quick">
+      <a href="#start">New here? Start here</a>
+      <a href="#controls">All the controls</a>
+      <a href="#editor">Design a beast</a>
+      <a href="#chat">Chat commands</a>
+      <a href="#trouble">Something's wrong</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+  <aside class="toc" aria-label="On this page">
+    <b>On this page</b>
+    <ol>
+      <li><a href="#start">Getting started</a></li>
+      <li><a href="#controls">Controls</a></li>
+      <li><a href="#life">How beasts live</a></li>
+      <li><a href="#predators">Predators</a></li>
+      <li><a href="#tools">Food, mud and more</a></li>
+      <li><a href="#editor">The beast editor</a></li>
+      <li><a href="#favorites">Favorites</a></li>
+      <li><a href="#leaderboard">The leaderboard</a></li>
+      <li><a href="#chat">Streams and chat</a></li>
+      <li><a href="#saves">Saves and settings</a></li>
+      <li><a href="#trouble">Troubleshooting</a></li>
+    </ol>
+  </aside>
+
+  <main class="guide">
+
+    <!-- 1 -->
+    <section id="start">
+      <h2><span class="num">1</span>Getting started</h2>
+      <p>Beasts are little creatures made of cells. They swim, eat the green algae, breed and evolve on their own, while tardigrades hunt them. You don't have to do anything: a pond left alone keeps going. Or lend a hand, and see what evolves.</p>
+      <h3>Your first five minutes</h3>
+      <ol class="steps">
+        <li><b>Watch for a moment.</b> Each world starts with a crowd of random beasts and a little algae. The ones that find food grow and breed; the others starve or get eaten.</li>
+        <li><b>Plant some algae.</b> Right-click (or tap with the <b>Algae</b> tool) to plant a patch. It grows out from where you clicked, then keeps spreading.</li>
+        <li><b>Add a beast.</b> Click (or tap with the <b>Beast</b> tool) anywhere on the water.</li>
+        <li><b>Pause and look closer.</b> Press <kbd>P</kbd> and hover over a beast to see its card: its name, family, cells and genes. Press <kbd>F</kbd> to keep it as a favorite.</li>
+        <li><b>Take over the hunter.</b> Press <kbd>A</kbd> to turn off auto hunt, steer the predator with <kbd>,</kbd> and <kbd>.</kbd>, and bite with <kbd>Space</kbd>.</li>
+      </ol>
+      <h3>Where to play</h3>
+      <div class="cards">
+        <div class="card"><b>In your browser</b><span>Free on this site, nothing to install. Works on phones and tablets too: hold them sideways.</span></div>
+        <div class="card"><b>On your computer</b><span>The desktop game for Mac, Windows and Linux is a pond to keep: it holds more beasts, runs all day in its own window with no internet, keeps your saves as files, and can stream to YouTube.</span></div>
+      </div>
+      <div class="note"><span>💡</span><p>On an iPhone or iPad, open the game in Safari, tap Share, then <b>Add to Home Screen</b>. It then opens full screen, like an app.</p></div>
+    </section>
+
+    <!-- 2 -->
+    <section id="controls">
+      <h2><span class="num">2</span>Controls</h2>
+      <p>On a Mac, shortcuts use <kbd>Cmd</kbd>; on Windows and Linux, <kbd>Ctrl</kbd>. In the tables they're written <kbd>Cmd/Ctrl</kbd>.</p>
+
+      <h3>Mouse</h3>
+      <div class="table"><table>
+        <tr><th>Do</th><th>What happens</th></tr>
+        <tr><td>Click</td><td>Add a beast</td></tr>
+        <tr><td>Right-click</td><td>Plant a patch of algae (on a Mac trackpad, click with two fingers)</td></tr>
+        <tr><td><kbd>D</kbd> + click</td><td>Drop a mud island</td></tr>
+        <tr><td><kbd>D</kbd> + right-click</td><td>Sink the island under the mouse, with any islands joined to it</td></tr>
+        <tr><td>Hover, while paused</td><td>Show a beast's card</td></tr>
+        <tr><td>Mouse wheel</td><td>Scroll the Favorites list, the leaderboard or a long help page</td></tr>
+      </table></div>
+
+      <h3>The pond</h3>
+      <div class="table"><table>
+        <tr><th>Key</th><th>What it does</th></tr>
+        <tr><td><kbd>P</kbd></td><td>Pause or play</td></tr>
+        <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Slower or faster (speeds 0 to 10; the game starts at 4)</td></tr>
+        <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>Room for more or fewer beasts (the most the pond can hold)</td></tr>
+        <tr><td><kbd>T</kbd></td><td>Paint mode: hold the mouse button to keep adding beasts or algae along the way</td></tr>
+        <tr><td><kbd>B</kbd></td><td>Start a swarm: every beast that can swarm does</td></tr>
+        <tr><td><kbd>Shift</kbd> + <kbd>N</kbd></td><td>Start a new world (it asks first; <kbd>Y</kbd> yes, <kbd>N</kbd> no)</td></tr>
+      </table></div>
+
+      <h3>Predators</h3>
+      <div class="table"><table>
+        <tr><th>Key</th><th>What it does</th></tr>
+        <tr><td><kbd>A</kbd></td><td>Auto hunt on or off for your predator (off: you steer it)</td></tr>
+        <tr><td><kbd>,</kbd> <kbd>.</kbd></td><td>Steer your predator; hold <kbd>Shift</kbd> to back up</td></tr>
+        <tr><td><kbd>Space</kbd></td><td>Bite</td></tr>
+        <tr><td><kbd>]</kbd> <kbd>[</kbd></td><td>Add a predator (up to 8), or remove the newest</td></tr>
+        <tr><td><kbd>M</kbd></td><td>How auto predators hunt: <b>Locked</b> on one beast, or <b>Opportunistic</b>, switching to closer ones</td></tr>
+      </table></div>
+
+      <h3>Panels and tools</h3>
+      <div class="table"><table>
+        <tr><th>Key</th><th>What it does</th></tr>
+        <tr><td><kbd>F</kbd> (paused)</td><td>Keep the beast under the mouse as a favorite</td></tr>
+        <tr><td><kbd>E</kbd></td><td>Open or close the beast editor (while paused over a beast, it opens a copy of that beast)</td></tr>
+        <tr><td><kbd>Tab</kbd></td><td>Show or hide the leaderboard</td></tr>
+        <tr><td><kbd>H</kbd></td><td>Show or hide the side panel</td></tr>
+        <tr><td><kbd>/</kbd></td><td>The command line, for commands like <code>!food C4</code> (see <a href="#chat">Streams and chat</a>)</td></tr>
+        <tr><td><kbd>L</kbd></td><td>Names over beasts on or off</td></tr>
+        <tr><td><kbd>C</kbd></td><td>Creature chatter on or off</td></tr>
+        <tr><td><kbd>I</kbd></td><td>How to play; <kbd>Tab</kbd> goes on to About</td></tr>
+        <tr><td><kbd>Cmd/Ctrl</kbd> + <kbd>=</kbd> <kbd>-</kbd></td><td>Bigger or smaller text (panels grow and shrink with it)</td></tr>
+        <tr><td><kbd>F11</kbd></td><td>Fullscreen</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>Close help or the editor, or leave fullscreen</td></tr>
+        <tr><td><kbd>Cmd/Ctrl</kbd> + <kbd>S</kbd></td><td>Save the world</td></tr>
+        <tr><td><kbd>Cmd/Ctrl</kbd> + <kbd>L</kbd></td><td>Load it</td></tr>
+        <tr><td><kbd>Cmd</kbd> + <kbd>Q</kbd></td><td>Quit (Mac). On Windows and Linux, close the window. In a browser, close the tab</td></tr>
+      </table></div>
+
+      <h3>Touch</h3>
+      <p>On a phone or tablet the touch controls show from the start. On a laptop with a touchscreen they appear at your first touch, and hide again when you move the mouse.</p>
+      <div class="table"><table>
+        <tr><th>Touch</th><th>What happens</th></tr>
+        <tr><td>Tap</td><td>Use the tool: <b>Beast</b> adds one, <b>Algae</b> plants a patch, <b>Mud</b> drops an island, <b>Sink</b> sinks one</td></tr>
+        <tr><td>Drag</td><td>Keep using the tool along your finger</td></tr>
+        <tr><td>Two fingers</td><td>Plant algae, whatever the tool</td></tr>
+        <tr><td>Hold on the water</td><td>Drop a mud island</td></tr>
+        <tr><td>Hold on an island</td><td>Sink it</td></tr>
+        <tr><td>Pause, then touch a beast</td><td>See its card; <b>Keep</b> makes it a favorite</td></tr>
+        <tr><td>Pause/Play, Slower, Faster</td><td>Pause and speed</td></tr>
+        <tr><td>Stick and Bite</td><td>Steer the predator and bite (shown while auto hunt is off)</td></tr>
+        <tr><td>Menu</td><td class="wrap-ok">Swarm, more or fewer predators, auto hunt, how they hunt, leaderboard, room, design a beast, names, chatter, side panel, text size, how to play, save, load, new world</td></tr>
+      </table></div>
+      <div class="note"><span>⌨️</span><p>Typing names (in the editor or a favorite's name) and <code>/</code> commands still needs a keyboard.</p></div>
+    </section>
+
+    <!-- 3 -->
+    <section id="life">
+      <h2><span class="num">3</span>How beasts live</h2>
+      <p>Nothing is scripted. Every beast is a little body of cells, and each cell does one job. Beasts that find food grow and breed; their children mix both parents' cells, with a few mutations. Over time, whatever works spreads.</p>
+      <h3>The cells</h3>
+      <div class="table"><table>
+        <tr><th>Cell</th><th>What it does</th><th>Looks like</th></tr>
+        <tr><td><svg class="cell" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#ec5a4c"/><circle cx="15" cy="15" r="7" fill="#fff"/><circle cx="16" cy="15" r="3.5" fill="#18299a"/></svg>Eye</td><td>Spots food within its range and turns the legs toward it</td><td>A white eye with a colored pupil</td></tr>
+        <tr><td><svg class="cell" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#9b6ee0"/><path d="M15 15 q4 -5 8 0 t7 0" stroke="#fff" stroke-width="2.2" fill="none"/></svg>Leg</td><td>Pushes the beast the way it points</td><td>A white wavy line trailing off it</td></tr>
+        <tr><td><svg class="cell" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#f2894a"/><circle cx="15" cy="15" r="4.5" fill="#000"/></svg>Mouth</td><td>Eats the food under it</td><td>A black dot that pulses</td></tr>
+        <tr><td><svg class="cell" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#3fbcaa"/><circle cx="15" cy="15" r="6" fill="#fff" stroke="#000" stroke-width="2.5"/></svg>Brain</td><td>Makes the beast fertile (without one, only a 1 in 4 chance)</td><td>A black ring, white inside when well fed</td></tr>
+        <tr><td><svg class="cell" viewBox="0 0 30 30" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="rgba(0,0,0,.35)"/><circle cx="15" cy="15" r="13" fill="#56b862"/></svg>Breeder</td><td>Grows new cells next to itself, so the body develops as the beast matures</td><td>A plain circle with a faint shadow</td></tr>
+        <tr><td><svg class="cell" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5" stroke-dasharray="3 3"/></svg>Plain</td><td>Nothing, but it still needs feeding</td><td>Invisible</td></tr>
+      </table></div>
+      <h3>Growing up and breeding</h3>
+      <ul>
+        <li>Every beast starts as a block of 8 cells. Breeders grow the rest of the body as it matures. Cells grown by breeders are never breeders themselves, so bodies can't grow forever.</li>
+        <li>When two grown-up beasts that can breed meet, they have a child. It gets a mix of both parents' 8 middle cells and traits (size, color, leg length, eye range and more), with some mutations.</li>
+        <li>Cells cost food. A beast that can't eat enough to feed all its cells starves.</li>
+      </ul>
+      <h3>Families and names</h3>
+      <p>Each beast that starts a world, or that you add, founds a family. Children join their first parent's family, one generation further on. Pause and hover over a beast to see its three names:</p>
+      <div class="cards">
+        <div class="card"><b>Zorvak</b><span>Its own name, made up when it's born</span></div>
+        <div class="card"><b>Great Crimson Strider</b><span>Its family's name, from the founder's size, color and main cell type</span></div>
+        <div class="card"><b><i>Pedipes rubrus</i></b><span>The family's science name, the same traits in made-up Latin</span></div>
+      </div>
+      <h3>Swarming</h3>
+      <p>About half of beasts carry the swarm trait. When an awake predator comes near, they panic and flee together, and the panic spreads through nearby swarmers in a wave. Three inherited genes shape the flock: keeping their distance, matching each other's heading, and staying together. Predators find it hard to pick one beast out of a dense swarm, so they go for loners. Press <kbd>B</kbd> to set off a swarm yourself.</p>
+      <h3>Chatter</h3>
+      <p>Beasts and predators say short lines about what's happening to them, in speech bubbles. Each family has its own voice: deadpan, cute, dramatic, or (for brainy families) a nature documentary narrator. Press <kbd>C</kbd> to turn chatter off.</p>
+    </section>
+
+    <!-- 4 -->
+    <section id="predators">
+      <h2><span class="num">4</span>Predators</h2>
+      <p>The predators are tardigrades. They hunt beasts by sight, so they can't spot a beast hidden behind a mud island.</p>
+      <ul>
+        <li><b>Your predator</b> is the first one, the original blue. It hunts by itself until you press <kbd>A</kbd>; then you steer it with <kbd>,</kbd> and <kbd>.</kbd> (or the stick, by touch) and bite with <kbd>Space</kbd>.</li>
+        <li><b>More predators:</b> press <kbd>]</kbd> to add up to 8, each its own color. The extra ones always hunt on their own. <kbd>[</kbd> removes the newest.</li>
+        <li><b>Sleeping:</b> a predator that goes too long without eating curls up into a dormant <i>tun</i>. A sleeping predator is prey: the others can hunt and eat it. If yours is eaten, the next one takes over.</li>
+        <li><b>How they hunt</b> (<kbd>M</kbd>): <b>Locked</b> predators chase one beast until it's eaten or gets away. <b>Opportunistic</b> ones switch to whatever's closer.</li>
+      </ul>
+    </section>
+
+    <!-- 5 -->
+    <section id="tools">
+      <h2><span class="num">5</span>Food, mud and more</h2>
+      <h3>Algae</h3>
+      <p>Algae is what beasts eat. Right-click (or use the <b>Algae</b> tool) to plant a patch: it grows out to about the size of a beast over a couple of seconds, then seeds its edges and keeps spreading. In Paint mode (<kbd>T</kbd>), drag to plant a trail of patches.</p>
+      <h3>Mud islands</h3>
+      <p>Hold <kbd>D</kbd> and click (or hold your finger on the water) to drop a sandy island into the pond with a kerplop. Islands change how a world plays:</p>
+      <ul>
+        <li>Nothing can cross them, and nothing can see past them. Beasts can hide behind them, and several islands can close off a lagoon.</li>
+        <li>Algae can't grow on them, but a fringe of beached algae along the shore makes a one-time snack, and fresh algae sprouts along the shoreline.</li>
+        <li>Some islands stay until you sink them; others sink by themselves after a few minutes. Up to 12 landmasses at once.</li>
+        <li>To sink one, hold <kbd>D</kbd> and right-click it (or hold your finger on it).</li>
+      </ul>
+      <h3>Speed and room</h3>
+      <p>Use <kbd>←</kbd> and <kbd>→</kbd> to slow the pond down to watch closely, or speed it up to see evolution happen. <kbd>↑</kbd> and <kbd>↓</kbd> set how many beasts the pond can hold. If your computer struggles, the game lowers that number by itself, removing the weakest beasts, and raises it again when there's room.</p>
+      <h3>When things go wrong in the pond</h3>
+      <p>A world never ends on its own. When beasts get scarce, a red banner asks for help ("Beasts are endangered!", "Last beast alive!", "Extinct!"), and an amber one asks for food when the algae runs low. Add beasts or algae and the same world carries on. To start fresh, press <kbd>Shift</kbd> + <kbd>N</kbd>; the game shows a summary of the world you left.</p>
+    </section>
+
+    <!-- 6 -->
+    <section id="editor">
+      <h2><span class="num">6</span>The beast editor</h2>
+      <p>Design your own beast, cell by cell. Press <kbd>E</kbd>, click <b>Editor (E)</b> in the side panel's Simulation section, or pick a favorite and click <b>Edit</b>. By touch, it's <b>Design a beast</b> in the Menu. The pond pauses while the editor is open.</p>
+      <figure class="shot"><img src="img/05-editor.jpg" alt="The beast editor open on the left, with a grid of cells, a palette and the cell's settings" loading="lazy"><figcaption>The editor slides in from the left.</figcaption></figure>
+      <ol class="steps">
+        <li><b>Start from something.</b> A blank slate, a favorite, or (while paused) a copy of the beast under the mouse. The original never changes.</li>
+        <li><b>Build the body.</b> On the <b>Body</b> tab, pick a cell type (Leg, Eye, Mouth, Brain, Breeder, or Erase) and click a cell or a <b>+</b> on the grid. Click a cell to set its size and color, and for legs, eyes and breeders their own settings.</li>
+        <li><b>Set the genes.</b> On the <b>Genes</b> tab: whether it swarms and how strongly, whether it can breed, and one color for the whole body.</li>
+        <li><b>Name it.</b> Click the name to type one.</li>
+        <li><b>Use it.</b> <b>Add</b>, then click in the pond to place it (as many as you like). <b>Save new</b> keeps it as a favorite; <b>Update</b> changes the favorite you opened.</li>
+      </ol>
+      <div class="note"><span>🧬</span><p><b>What children inherit:</b> only the 8 cells in the middle of the body, marked with green rings. Breeders can only go on those cells. The rest of a body grows from breeders, so design those 8 carefully if you want your beast's line to last.</p></div>
+      <p>Warnings point out what a design lacks (no mouth: it can't eat; no legs: it can't move), but they don't stop you. Closing the editor throws away unsaved changes.</p>
+    </section>
+
+    <!-- 7 -->
+    <section id="favorites">
+      <h2><span class="num">7</span>Favorites</h2>
+      <p>Favorites are beasts you keep. Every favorite joins the start of each new world, fully fed, alongside the random beasts.</p>
+      <ul>
+        <li><b>Keep one:</b> pause, hover over a beast and press <kbd>F</kbd> (by touch, tap <b>Keep</b> on its card). Or click the green <b>+</b> next to a record on the leaderboard. Up to 50.</li>
+        <li><b>See them:</b> open the <b>Favorites</b> section of the side panel. Scroll with the mouse wheel or drag the scrollbar.</li>
+        <li><b>Add a copy now:</b> click the green <b>+</b> beside a favorite.</li>
+        <li><b>Rename:</b> click its name, type, and press <kbd>Enter</kbd> (<kbd>Esc</kbd> cancels).</li>
+        <li><b>Edit:</b> select it and click <b>Edit</b> to open it in the editor.</li>
+        <li><b>Delete:</b> select it, click the red <b>✕</b>, then click it again to confirm.</li>
+      </ul>
+      <div class="note warm"><span>🐟</span><p>Many favorites make crowded starts, since every one of them joins each new world.</p></div>
+    </section>
+
+    <!-- 8 -->
+    <section id="leaderboard">
+      <h2><span class="num">8</span>The leaderboard</h2>
+      <p>Press <kbd>Tab</kbd>, or click the tab at the top left, to slide in the leaderboard.</p>
+      <figure class="shot"><img src="img/03-panels-leaderboard.jpg" alt="The leaderboard on the left and the side panel on the right, around the pond" loading="lazy"><figcaption>The leaderboard on the left, the side panel on the right.</figcaption></figure>
+      <div class="cards">
+        <div class="card"><b>Families</b><span>The five biggest families alive, with a picture of each one's oldest member</span></div>
+        <div class="card"><b>Records</b><span>The oldest beast, the one with the most children, and the biggest. A record stays until a living beast beats it</span></div>
+        <div class="card"><b>Predators</b><span>Every predator, scored by kills, plus 3 for each sleeping predator eaten</span></div>
+      </div>
+      <p><b>This run</b> covers the current world. <b>All-time</b> keeps the biggest families, record holders and best hunters from every world you've played.</p>
+    </section>
+
+    <!-- 9 -->
+    <section id="chat">
+      <h2><span class="num">9</span>Streams and chat</h2>
+      <p>When the pond is streaming live on <a href="https://www.youtube.com/@AndrewHarding-AI" target="_blank" rel="noopener">YouTube</a>, anyone watching can play along by typing commands in the chat. A faint grid (A to H across, 1 to 6 down) shows on the stream so you can aim.</p>
+      <div class="table"><table>
+        <tr><th>Command</th><th>What it does</th></tr>
+        <tr><td><code>!food</code> or <code>!food C4</code></td><td>Plant algae at a random spot, or in grid square C4</td></tr>
+        <tr><td><code>!beast</code> or <code>!beast C4</code></td><td>Add a random beast</td></tr>
+        <tr><td><code>!mud</code> or <code>!mud C4</code></td><td>Drop a mud island</td></tr>
+        <tr><td><code>!predator</code></td><td>Release another hunter (up to 8)</td></tr>
+        <tr><td><code>!swarm</code></td><td>Start a panic</td></tr>
+        <tr><td><code>!name Bob</code></td><td>Name a random beast. Named beasts talk more</td></tr>
+        <tr><td><code>!family Bob's Gang</code></td><td>Rename the biggest family no one has named yet</td></tr>
+      </table></div>
+      <p>Each person can use each command once every 10 seconds. Commands do nothing while the pond is paused. A name filter keeps rude names off the stream.</p>
+      <h3>Try them at home</h3>
+      <p>You can run the same commands in your own game, no stream needed: press <kbd>/</kbd>, type the rest of the command (it starts with <code>!</code> for you), and press <kbd>Enter</kbd>. <kbd>↑</kbd> recalls earlier ones; <kbd>Esc</kbd> closes it.</p>
+      <p>One extra command only works there: <code>!keepalive 30</code> keeps the population topped up for 30 minutes, adding beasts and algae when numbers fall. <code>!keepalive off</code> stops it.</p>
+      <h3>Stream your own pond</h3>
+      <p>The desktop game can stream itself to your own YouTube channel, with viewers' chat commands. It's for the technically minded: it needs FFmpeg installed, a YouTube stream key, and the game launched from a terminal with <code>-stream</code>. Nothing goes live until you press <kbd>Cmd/Ctrl</kbd> + <kbd>Y</kbd>.</p>
+    </section>
+
+    <!-- 10 -->
+    <section id="saves">
+      <h2><span class="num">10</span>Saves and settings</h2>
+      <p>Press <kbd>Cmd/Ctrl</kbd> + <kbd>S</kbd> to save the world, and <kbd>Cmd/Ctrl</kbd> + <kbd>L</kbd> to load it. There's one save; each save keeps the one before as a backup. A new game always starts a new world, so load your save when you want it back.</p>
+      <p>Favorites, the all-time leaderboard and your text size are saved by themselves.</p>
+      <div class="table"><table>
+        <tr><th>Where</th><th>Your saves live in</th></tr>
+        <tr><td>Browser</td><td class="wrap-ok">Your browser's storage for this site. Clearing the site's data, or playing in a private window, loses them</td></tr>
+        <tr><td>Mac</td><td><code>~/Library/Application Support/Beasts</code></td></tr>
+        <tr><td>Windows</td><td><code>%AppData%\Beasts</code></td></tr>
+        <tr><td>Linux</td><td><code>~/.config/Beasts</code></td></tr>
+      </table></div>
+      <p class="muted">On a computer, that folder holds <code>save.json</code> (the world), <code>favorites.json</code>, <code>leaderboard.json</code> and <code>settings.json</code>. Copy it to back everything up.</p>
+    </section>
+
+    <!-- 11 -->
+    <section id="trouble">
+      <h2><span class="num">11</span>Troubleshooting</h2>
+      <details><summary>Clicking doesn't add beasts</summary><p>Check that the pond isn't paused (press <kbd>P</kbd>), and that you're clicking on the water, not a panel. The pond may also be full: press <kbd>↑</kbd> to make room for more.</p></details>
+      <details><summary>All my beasts died</summary><p>Click to add new ones, or press <kbd>Shift</kbd> + <kbd>N</kbd> for a fresh world. If they keep starving, plant more algae; if they keep getting eaten, remove a predator with <kbd>[</kbd>.</p></details>
+      <details><summary>The game is slow, or beasts keep disappearing</summary><p>When your computer can't keep up, the game lowers how many beasts the pond holds and removes the weakest. To help it, make the window smaller, lower the speed with <kbd>←</kbd>, or remove some predators. The desktop game runs faster than the browser version.</p></details>
+      <details><summary>My phone says to turn it sideways</summary><p>The pond plays in landscape. Turn your phone sideways, and turn off rotation lock if it doesn't flip.</p></details>
+      <details><summary>My saves are gone in the browser</summary><p>Browser saves live in the browser's storage for this site. Private windows, clearing site data, or some browsers' storage limits can remove them. For saves that last, use the desktop game.</p></details>
+      <details><summary>The panels cover the pond</summary><p>Press <kbd>H</kbd> to hide the side panel and <kbd>Tab</kbd> to hide the leaderboard. Smaller text (<kbd>Cmd/Ctrl</kbd> + <kbd>-</kbd>) makes the panels smaller too.</p></details>
+      <details><summary>A shortcut doesn't work in the browser</summary><p>Browsers keep some shortcuts for themselves, which is why a new world is <kbd>Shift</kbd> + <kbd>N</kbd>. Click the game first so it has focus, then try again.</p></details>
+      <div class="note"><span>✉️</span><p><b>Still stuck, or found a bug?</b> Email <a href="mailto:apps@marmonte.ai">apps@marmonte.ai</a> with what happened and what you were playing on (browser or desktop, and which computer, phone or tablet). You can also message Andrew on <a href="https://www.linkedin.com/in/andrewrharding" target="_blank" rel="noopener">LinkedIn</a> or <a href="https://x.com/marmonte_ai" target="_blank" rel="noopener">X</a>.</p></div>
+    </section>
+
+  </main>
+</div>
+
+<div class="end">
+  <h2>Ready to dive in?</h2>
+  <p>The pond is waiting, and it's free.</p>
+  <div class="end-ctas">
+  <a class="btn btn-play" href="index.html#play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l14 8-14 8z"/></svg>Play free in your browser</a>
+  <a class="btn btn-ghost" href="index.html#download"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v13"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>Download free</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>Beasts, by <a href="https://marmonte.ai">marmonte</a>. Free to play.</div>
+    <div class="say">Say hello: <a href="mailto:apps@marmonte.ai">Email</a> · <a href="https://www.linkedin.com/in/andrewrharding" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://x.com/marmonte_ai" target="_blank" rel="noopener">X</a> · <a href="https://github.com/ah-marmonte" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.youtube.com/@AndrewHarding-AI" target="_blank" rel="noopener">YouTube</a></div>
+    <div><a href="index.html#play">Play</a> · <a href="index.html#watch">Watch</a> · <a href="index.html#download">Download</a> · <a href="help.html">Help</a> · <a href="index.html#faq">FAQ</a></div>
+  </div>
+</footer>
+
+<script>
+"use strict";
+// Highlight the section being read in the contents
+const links = [...document.querySelectorAll(".toc a")];
+const spy = new IntersectionObserver(entries => {
+  for (const e of entries) if (e.isIntersecting) {
+    links.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
+  }
+}, { rootMargin: "-30% 0px -60% 0px" });
+document.querySelectorAll(".guide section").forEach(s => spy.observe(s));
+</script>
+</body>
+</html>
